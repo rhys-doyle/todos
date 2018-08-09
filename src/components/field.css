@@ -1,0 +1,22 @@
+.data {
+  display: block;
+  margin: 0 auto;
+  max-width: 550px;
+  width: 100%;
+  outline: none;
+  font-size: 25px;
+  padding: 16px 16px 16px 60px;
+  border: none;
+  font-weight: 100;
+  letter-spacing: 1px;
+  background: rgb(254, 254, 254);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.13);
+  color: rgb(77, 77, 77);
+}
+
+.data::placeholder {
+  font-weight: 100;
+  font-size: 25px;
+  color: rgb(230, 230, 230);
+  letter-spacing: 2px;
+}
