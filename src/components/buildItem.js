@@ -3,10 +3,12 @@ import Item from "./item.js";
 import PropTypes from "prop-types";
 
 const BuildItem = props => {
-  const isEnter = props.isEnter;
   const isValue = props.isValue;
-  if (isValue !== "" && isEnter === false)
+  if (isValue !== "" && isEnter) {
     return <Item todo={props.todo} double={props.double} />;
+  } else {
+    return null;
+  }
 };
 
 BuildItem.proptypes = {
