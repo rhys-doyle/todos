@@ -2,7 +2,7 @@ import React from "react";
 import "./statusBar.css";
 
 const areCompleted = props => {
-  if (props.todosLength - props.activeTotal) {
+  if (props.completeTotal) {
     return (
       <span className="clear" onClick={props.clearCompleted}>
         Clear Completed
@@ -15,8 +15,12 @@ const StatusBar = props => {
   return (
     <div className="statusBar">
       <span className="remaining">
-        <strong className="total">{props.activeTotal}</strong>
-        {` item${props.activeTotal === 1 ? "" : "s"} left`}
+        <strong className="total">
+          {props.todosLength - props.completeTotal}
+        </strong>
+        {` item${
+          props.todosLength - props.completeTotal === 1 ? "" : "s"
+        } left`}
       </span>
       <span className="view">
         <a href="/" className="all">

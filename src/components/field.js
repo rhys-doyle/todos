@@ -6,15 +6,11 @@ import StatusBar from "./statusBar";
 class Field extends React.Component {
   state = {
     value: "",
-    todos: [],
-    activeTotal: 0
+    todos: []
   };
 
   remove = index => {
     const cloneTodos = this.state.todos.slice();
-    if (cloneTodos[index].active) {
-      this.setState({ activeTotal: this.state.activeTotal - 1 });
-    }
     cloneTodos.splice(index, 1);
     this.setState({ todos: cloneTodos });
   };
@@ -44,19 +40,15 @@ class Field extends React.Component {
 
       this.setState({
         todos: cloneTodos,
-        value: "",
-        activeTotal: this.state.activeTotal + 1
+        value: ""
       });
     }
   };
 
+  numberOfComplete = () => this.state.todos.filter(todo => !todo.active).length;
+
   doneToggle = index => {
     const cloneTodos = this.state.todos.slice();
-    if (cloneTodos[index].active) {
-      this.setState({ activeTotal: this.state.activeTotal - 1 });
-    } else {
-      this.setState({ activeTotal: this.state.activeTotal + 1 });
-    }
     cloneTodos[index].active = !cloneTodos[index].active;
     this.setState({ todos: cloneTodos });
   };
@@ -72,9 +64,6 @@ class Field extends React.Component {
     const cloneTodos = this.state.todos.slice();
     cloneTodos[index].edit = !cloneTodos[index].edit;
     if (!cloneTodos[index].edit && cloneTodos[index].title === "") {
-      if (cloneTodos[index].active) {
-        this.setState({ activeTotal: this.state.activeTotal - 1 });
-      }
       cloneTodos.splice(index, 1);
     } else {
       cloneTodos[index].lastValue = cloneTodos[index].title;
@@ -122,7 +111,7 @@ class Field extends React.Component {
           </div>
         </div>
         <StatusBar
-          activeTotal={this.state.activeTotal}
+          completeTotal={this.numberOfComplete()}
           clearCompleted={this.clearCompleted}
           todosLength={this.state.todos.length}
         />
