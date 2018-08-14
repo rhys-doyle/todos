@@ -1,12 +1,35 @@
 import React from "react";
 import "./field.css";
 import Item from "./item";
+import StatusBar from "./statusBar";
 
 class Field extends React.Component {
   state = {
     value: "",
-    double: false,
-    todos: []
+    todos: [],
+    activeTotal: 0
+  };
+
+  remove = index => {
+    const cloneTodos = this.state.todos.slice();
+    if (cloneTodos[index].active) {
+      this.setState({ activeTotal: this.state.activeTotal - 1 });
+    }
+    cloneTodos.splice(index, 1);
+    this.setState({ todos: cloneTodos });
+  };
+
+  clearCompleted = () => {
+    const cloneTodos = this.state.todos.slice();
+    let loop = -1;
+    cloneTodos.forEach(obj => {
+      loop = loop + 1;
+      if (!obj.active) {
+        cloneTodos.splice(loop, 1);
+        console.log(cloneTodos);
+      }
+    });
+    this.setState({ todos: cloneTodos });
   };
 
   keyCheck = event => {
@@ -14,24 +37,58 @@ class Field extends React.Component {
       const cloneTodos = this.state.todos.slice();
       cloneTodos.push({
         title: this.state.value,
-        completed: false,
-        edit: false
+        edit: false,
+        lastValue: this.state.value,
+        active: true
       });
+
       this.setState({
         todos: cloneTodos,
-        value: ""
+        value: "",
+        activeTotal: this.state.activeTotal + 1
       });
     }
   };
 
+  doneToggle = index => {
+    const cloneTodos = this.state.todos.slice();
+    if (cloneTodos[index].active) {
+      this.setState({ activeTotal: this.state.activeTotal - 1 });
+    } else {
+      this.setState({ activeTotal: this.state.activeTotal + 1 });
+    }
+    cloneTodos[index].active = !cloneTodos[index].active;
+    this.setState({ todos: cloneTodos });
+  };
+
+  setValue = index => {
+    const cloneTodos = this.state.todos.slice();
+    cloneTodos[index].edit = !cloneTodos[index].edit;
+    cloneTodos[index].title = cloneTodos[index].lastValue;
+    this.setState({ todos: cloneTodos });
+  };
+
   handleEdit = index => {
     const cloneTodos = this.state.todos.slice();
-    cloneTodos[index].edit = true;
+    cloneTodos[index].edit = !cloneTodos[index].edit;
+    if (!cloneTodos[index].edit && cloneTodos[index].title === "") {
+      if (cloneTodos[index].active) {
+        this.setState({ activeTotal: this.state.activeTotal - 1 });
+      }
+      cloneTodos.splice(index, 1);
+    } else {
+      cloneTodos[index].lastValue = cloneTodos[index].title;
+    }
+    this.setState({ todos: cloneTodos });
+  };
+
+  handleOnChange = (index, newValue) => {
+    const cloneTodos = this.state.todos.slice();
+    cloneTodos[index].title = newValue.trim();
     this.setState({ todos: cloneTodos });
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="todoBox">
         <div className="newTodo">
@@ -44,21 +101,30 @@ class Field extends React.Component {
             onChange={event => this.setState({ value: event.target.value })}
             value={this.state.value}
           />
+          <div className="todoListBox">
+            <ul className="todoList">
+              {this.state.todos.map((item, index) => {
+                return (
+                  <Item
+                    active={this.state.todos[index].active}
+                    doneToggle={this.doneToggle}
+                    index={index}
+                    key={`item-${index}`}
+                    {...item}
+                    handleEdit={this.handleEdit}
+                    handleOnChange={this.handleOnChange}
+                    setValue={this.setValue}
+                    remove={this.remove}
+                  />
+                );
+              })}
+            </ul>
+          </div>
         </div>
-        <div className="todoListBox">
-          <ul className="todoList">
-            {this.state.todos.map((item, index) => {
-              return (
-                <Item
-                  index={index}
-                  key={`item-${index}`}
-                  {...item}
-                  onDoubleClick={this.handleEdit}
-                />
-              );
-            })}
-          </ul>
-        </div>
+        <StatusBar
+          activeTotal={this.state.activeTotal}
+          clearCompleted={this.clearCompleted}
+        />
       </div>
     );
   }

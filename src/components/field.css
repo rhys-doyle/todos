@@ -1,8 +1,5 @@
 .data {
-  display: block;
-  margin: 0 auto;
-  max-width: 550px;
-  width: 100%;
+  width: 86%;
   outline: none;
   font-size: 25px;
   padding: 16px 16px 16px 60px;
@@ -19,4 +16,9 @@
   font-size: 25px;
   color: rgb(230, 230, 230);
   letter-spacing: 2px;
+}
+
+.newTodo {
+  max-width: 550px;
+  margin: 0 auto;
 }

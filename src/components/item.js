@@ -1,24 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const handleKeyDown = (event, handleEdit, index, setValue) => {
+  if (event.keyCode === 13) {
+    handleEdit(index);
+  } else if (event.keyCode === 27) {
+    setValue(index);
+  }
+};
+
 const Item = props => {
   return (
     <li className="todoItem">
-      <input className="toggle" type="checkbox" value="done" />
-      <label
-        className="todoName"
-        contentEditable={props.edit}
-        onDoubleClick={() => props.onDoubleClick(props.index)}
-      >
-        {props.title}
-      </label>
-      <button className="remove" onClick={() => {}} />
+      <span className="toggleBox">
+        <input
+          className="toggle"
+          type="checkbox"
+          value="done"
+          onClick={() => props.doneToggle(props.index)}
+        />
+      </span>
+      <input
+        className="todo"
+        value={props.title}
+        onBlur={() => props.handleEdit(props.index)}
+        onKeyDown={event =>
+          handleKeyDown(event, props.handleEdit, props.index, props.setValue)
+        }
+        onDoubleClick={() => props.handleEdit(props.index)}
+        readOnly={!props.edit}
+        onChange={event =>
+          props.handleOnChange(props.index, event.target.value)
+        }
+      />
+
+      <button className="remove" onClick={() => props.remove(props.index)} />
     </li>
   );
 };
 
 Item.proptypes = {
-  double: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired
 };
 
