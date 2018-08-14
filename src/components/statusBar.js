@@ -23,13 +23,34 @@ const StatusBar = props => {
         } left`}
       </span>
       <span className="view">
-        <a href="/" className="all">
+        <a
+          href="/"
+          className="all"
+          onClick={event => {
+            event.preventDefault();
+            props.handleRouteChange("all");
+          }}
+        >
           All
         </a>
-        <a href="/active" className="active">
+        <a
+          href="/active"
+          className="active"
+          onClick={event => {
+            event.preventDefault();
+            props.handleRouteChange("active");
+          }}
+        >
           Active
         </a>
-        <a href="/completed" className="completed">
+        <a
+          href="/completed"
+          className="completed"
+          onClick={event => {
+            event.preventDefault();
+            props.handleRouteChange("completed");
+          }}
+        >
           Completed
         </a>
       </span>

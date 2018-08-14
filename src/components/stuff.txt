@@ -1,4 +1,3 @@
-conditional rendering of 'clear completed'
 classnames adding
 routing
 persistence

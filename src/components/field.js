@@ -6,7 +6,8 @@ import StatusBar from "./statusBar";
 class Field extends React.Component {
   state = {
     value: "",
-    todos: []
+    todos: [],
+    route: "all"
   };
 
   remove = index => {
@@ -46,6 +47,17 @@ class Field extends React.Component {
     }
   };
 
+  filterTodos = () => {
+    if (this.state.route === "active") {
+      console.log("route=", this.state.route);
+      return this.state.todos.filter(todo => todo.active);
+    } else if (this.state.route === "completed") {
+      console.log("route=", this.state.route);
+      return this.state.todos.filter(todo => !todo.active);
+    }
+    return this.state.todos;
+  };
+
   numberOfComplete = () => this.state.todos.filter(todo => !todo.active).length;
 
   doneToggle = index => {
@@ -78,6 +90,10 @@ class Field extends React.Component {
     this.setState({ todos: cloneTodos });
   };
 
+  handleRouteChange = route => {
+    this.setState({ route });
+  };
+
   render() {
     return (
       <div className="todoBox">
@@ -93,7 +109,7 @@ class Field extends React.Component {
           />
           <div className="todoListBox">
             <ul className="todoList">
-              {this.state.todos.map((item, index) => {
+              {this.filterTodos().map((item, index) => {
                 return (
                   <Item
                     active={this.state.todos[index].active}
@@ -116,6 +132,7 @@ class Field extends React.Component {
             completeTotal={this.numberOfComplete()}
             clearCompleted={this.clearCompleted}
             todosLength={this.state.todos.length}
+            handleRouteChange={this.handleRouteChange}
           />
         )}
       </div>
