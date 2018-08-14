@@ -35,7 +35,8 @@ class Field extends React.Component {
         title: this.state.value,
         edit: false,
         lastValue: this.state.value,
-        active: true
+        active: true,
+        id: new Date().getTime()
       });
 
       this.setState({
@@ -98,7 +99,7 @@ class Field extends React.Component {
                     active={this.state.todos[index].active}
                     doneToggle={this.doneToggle}
                     index={index}
-                    key={`item-${index}`}
+                    key={item.id}
                     {...item}
                     handleEdit={this.handleEdit}
                     handleOnChange={this.handleOnChange}
