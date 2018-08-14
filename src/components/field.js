@@ -111,11 +111,13 @@ class Field extends React.Component {
             </ul>
           </div>
         </div>
-        <StatusBar
-          completeTotal={this.numberOfComplete()}
-          clearCompleted={this.clearCompleted}
-          todosLength={this.state.todos.length}
-        />
+        {!!this.state.todos.length && (
+          <StatusBar
+            completeTotal={this.numberOfComplete()}
+            clearCompleted={this.clearCompleted}
+            todosLength={this.state.todos.length}
+          />
+        )}
       </div>
     );
   }
