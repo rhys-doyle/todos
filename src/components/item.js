@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
 const handleKeyDown = (event, handleEdit, index, setValue) => {
   if (event.keyCode === 13) {
@@ -21,7 +22,10 @@ const Item = props => {
         />
       </span>
       <input
-        className="todo"
+        className={classnames({
+          todo: true,
+          completed: !props.active
+        })}
         value={props.title}
         onBlur={() => props.handleEdit(props.index)}
         onKeyDown={event =>

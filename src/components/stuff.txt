@@ -1,5 +1,6 @@
-classnames adding
-routing
-persistence
+persistence storing state in localStorage json.stringify !important
 css formatting
 italic placeholder
+routing
+browser history mdn
+history mdn instead of routing !important

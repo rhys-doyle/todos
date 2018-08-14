@@ -133,6 +133,7 @@ class Field extends React.Component {
             clearCompleted={this.clearCompleted}
             todosLength={this.state.todos.length}
             handleRouteChange={this.handleRouteChange}
+            currentRoute={this.state.route}
           />
         )}
       </div>

@@ -25,7 +25,7 @@ const StatusBar = props => {
       <span className="view">
         <a
           href="/"
-          className="all"
+          className={props.currentRoute === "all" ? "currentRoute" : ""}
           onClick={event => {
             event.preventDefault();
             props.handleRouteChange("all");
@@ -35,7 +35,7 @@ const StatusBar = props => {
         </a>
         <a
           href="/active"
-          className="active"
+          className={props.currentRoute === "active" ? "currentRoute" : ""}
           onClick={event => {
             event.preventDefault();
             props.handleRouteChange("active");
@@ -45,7 +45,7 @@ const StatusBar = props => {
         </a>
         <a
           href="/completed"
-          className="completed"
+          className={props.currentRoute === "completed" ? "currentRoute" : ""}
           onClick={event => {
             event.preventDefault();
             props.handleRouteChange("completed");
