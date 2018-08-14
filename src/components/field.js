@@ -124,6 +124,7 @@ class Field extends React.Component {
         <StatusBar
           activeTotal={this.state.activeTotal}
           clearCompleted={this.clearCompleted}
+          todosLength={this.state.todos.length}
         />
       </div>
     );

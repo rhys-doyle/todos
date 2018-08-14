@@ -1,0 +1,50 @@
+.statusBar {
+  text-align: center;
+  display: flex;
+  max-width: 550px;
+  margin: -15px auto 0 auto;
+  justify-content: space-between;
+  background: rgb(9254, 254, 254);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.13);
+  padding: 7px 0;
+  color: #919191;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+}
+
+.remaining {
+  padding: 5px 5px 5px 1rem;
+  border: 2px solid transparent;
+}
+
+.clear {
+  padding: 5px 1rem 5px 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.view {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  padding: 5px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  border: 2px solid rgba(175, 47, 47, 0.15);
+  border-radius: 5px;
+}
+
+.clear:hover {
+  text-decoration: underline black;
+}
+
+strong {
+  font-weight: inherit;
+}
