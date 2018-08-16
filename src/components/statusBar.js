@@ -1,5 +1,6 @@
 import React from "react";
 import "./statusBar.css";
+import { Link } from "react-router-dom";
 
 const areCompleted = props => {
   if (props.completeTotal) {
@@ -23,36 +24,36 @@ const StatusBar = props => {
         } left`}
       </span>
       <span className="view">
-        <a
-          href="/"
+        <Link
+          to="/"
           className={props.currentRoute === "all" ? "currentRoute" : ""}
           onClick={event => {
-            event.preventDefault();
+            //event.preventDefault();
             props.handleRouteChange("all");
           }}
         >
           All
-        </a>
-        <a
-          href="/active"
+        </Link>
+        <Link
+          to="/active"
           className={props.currentRoute === "active" ? "currentRoute" : ""}
           onClick={event => {
-            event.preventDefault();
+            //event.preventDefault();
             props.handleRouteChange("active");
           }}
         >
           Active
-        </a>
-        <a
-          href="/completed"
+        </Link>
+        <Link
+          to="/completed"
           className={props.currentRoute === "completed" ? "currentRoute" : ""}
           onClick={event => {
-            event.preventDefault();
+            //event.preventDefault();
             props.handleRouteChange("completed");
           }}
         >
           Completed
-        </a>
+        </Link>
       </span>
       {areCompleted(props)}
     </div>
