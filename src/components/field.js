@@ -10,10 +10,26 @@ class Field extends React.Component {
     route: "all"
   };
 
+  storeState = () => {
+    let stateString = JSON.stringify(this.state);
+    localStorage.setItem("stateInfo", stateString);
+  };
+
+  retrieveState = () => {
+    let stateString = localStorage.getItem("stateInfo");
+    let newState = JSON.parse(stateString);
+    this.setState({
+      value: "",
+      todos: newState.todos,
+      route: newState.route
+    });
+  };
+
   remove = index => {
     const cloneTodos = this.state.todos.slice();
     cloneTodos.splice(index, 1);
     this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   clearCompleted = () => {
@@ -23,10 +39,10 @@ class Field extends React.Component {
       loop = loop + 1;
       if (!obj.active) {
         cloneTodos.splice(loop, 1);
-        console.log(cloneTodos);
       }
     });
     this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   keyCheck = event => {
@@ -44,18 +60,18 @@ class Field extends React.Component {
         todos: cloneTodos,
         value: ""
       });
+      this.storeState();
     }
   };
 
   filterTodos = () => {
-    if (this.state.route === "active") {
-      console.log("route=", this.state.route);
-      return this.state.todos.filter(todo => todo.active);
-    } else if (this.state.route === "completed") {
-      console.log("route=", this.state.route);
-      return this.state.todos.filter(todo => !todo.active);
+    const { route, todos } = this.state;
+    if (route === "active") {
+      return todos.filter(todo => todo.active);
+    } else if (route === "completed") {
+      return todos.filter(todo => !todo.active);
     }
-    return this.state.todos;
+    return todos;
   };
 
   numberOfComplete = () => this.state.todos.filter(todo => !todo.active).length;
@@ -64,6 +80,7 @@ class Field extends React.Component {
     const cloneTodos = this.state.todos.slice();
     cloneTodos[index].active = !cloneTodos[index].active;
     this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   setValue = index => {
@@ -71,6 +88,7 @@ class Field extends React.Component {
     cloneTodos[index].edit = !cloneTodos[index].edit;
     cloneTodos[index].title = cloneTodos[index].lastValue;
     this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   handleEdit = index => {
@@ -82,16 +100,19 @@ class Field extends React.Component {
       cloneTodos[index].lastValue = cloneTodos[index].title;
     }
     this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   handleOnChange = (index, newValue) => {
     const cloneTodos = this.state.todos.slice();
     cloneTodos[index].title = newValue.trim();
     this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   handleRouteChange = route => {
     this.setState({ route });
+    this.storeState();
   };
 
   render() {
@@ -138,6 +159,10 @@ class Field extends React.Component {
         )}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.retrieveState();
   }
 }
 
