@@ -1,0 +1,59 @@
+li {
+  width: 100%;
+  border-bottom: 1px solid #ededed;
+}
+
+.toggle {
+  opacity: 0;
+  cursor: pointer;
+  max-width: 2px;
+  position: absolute;
+  left: 9px;
+  top: 9px;
+}
+
+.toggleBox {
+  position: relative;
+  padding: 9px;
+  border: 1.5px solid #ededed;
+  border-radius: 50%;
+  cursor: pointer;
+  color: transparent;
+  text-align: center;
+}
+
+.todo {
+  padding: 16px;
+  border: 1px solid transparent;
+  background-color: rgb(254, 254, 254);
+  width: 70%;
+  font-size: 25px;
+  font-weight: 100;
+  outline: none;
+}
+
+button {
+  font-size: 38px;
+  font-weight: 100;
+  color: rgba(175, 47, 47, 0.35);
+  border: none;
+  padding-right: 10px;
+}
+
+.todoItem::before {
+  content: "hi";
+  color: transparent;
+  background-color: inherit;
+  position: relative;
+}
+
+.done {
+  text-decoration: line-through #ededed;
+  color: #ededed;
+}
+
+.checked {
+  border: 1.5px solid #c0dad5;
+  color: #6cc2af;
+  font-weight: 100;
+}

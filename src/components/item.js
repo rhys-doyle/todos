@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import "./item.css";
 
 const handleKeyDown = (event, handleEdit, index, setValue) => {
   if (event.keyCode === 13) {
@@ -13,18 +14,25 @@ const handleKeyDown = (event, handleEdit, index, setValue) => {
 const Item = props => {
   return (
     <li className="todoItem">
-      <span className="toggleBox">
+      <label
+        className={classnames({
+          toggleBox: true,
+          checked: !props.active
+        })}
+      >
+        &nbsp;&#10004;&nbsp;
         <input
           className="toggle"
           type="checkbox"
           value="done"
           onClick={() => props.doneToggle(props.index)}
+          checked={!props.active}
         />
-      </span>
+      </label>
       <input
         className={classnames({
           todo: true,
-          completed: !props.active
+          done: !props.active
         })}
         value={props.title}
         onBlur={() => props.handleEdit(props.index)}
@@ -38,7 +46,9 @@ const Item = props => {
         }
       />
 
-      <button className="remove" onClick={() => props.remove(props.index)} />
+      <button className="remove" onClick={() => props.remove(props.index)}>
+        ×
+      </button>
     </li>
   );
 };

@@ -1,5 +1,5 @@
 .data {
-  width: 86%;
+  width: calc(100% - 76px);
   outline: none;
   font-size: 25px;
   padding: 16px 16px 16px 60px;
@@ -25,4 +25,13 @@
 
 .data::before {
   content: "❯";
+}
+
+ul {
+  list-style-type: none;
+  width: 100%;
+  margin: 2px auto 15px 0;
+  background-color: rgb(254, 254, 254);
+  padding: 0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.13);
 }
