@@ -1,8 +1,8 @@
 .data {
-  width: calc(100% - 76px);
+  width: calc(100% - 84px);
   outline: none;
   font-size: 25px;
-  padding: 16px 16px 16px 60px;
+  padding: 16px 16px 16px 68px;
   border: none;
   font-weight: 100;
   letter-spacing: 1px;
@@ -12,6 +12,7 @@
 }
 
 .data::placeholder {
+  font-style: italic;
   font-weight: 100;
   font-size: 25px;
   color: rgb(230, 230, 230);
@@ -21,10 +22,17 @@
 .newTodo {
   max-width: 550px;
   margin: 0 auto;
+  position: relative;
 }
 
-.data::before {
+.newTodo::before {
   content: "❯";
+  position: absolute;
+  transform: rotate(90deg);
+  left: 26px;
+  top: 20px;
+  font-size: 25px;
+  color: rgb(230, 230, 230);
 }
 
 ul {

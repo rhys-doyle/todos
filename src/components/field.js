@@ -17,12 +17,16 @@ class Field extends React.Component {
 
   retrieveState = () => {
     let stateString = localStorage.getItem("stateInfo");
-    let newState = JSON.parse(stateString);
-    this.setState({
-      value: "",
-      todos: newState.todos,
-      route: newState.route
-    });
+    try {
+      let newState = JSON.parse(stateString);
+      this.setState({
+        value: "",
+        todos: newState.todos,
+        route: newState.route
+      });
+    } catch (error) {
+      return;
+    }
   };
 
   remove = index => {
