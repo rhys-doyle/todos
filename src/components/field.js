@@ -2,6 +2,7 @@ import React from "react";
 import "./field.css";
 import Item from "./item";
 import StatusBar from "./statusBar";
+import classnames from "classnames";
 
 class Field extends React.Component {
   state = {
@@ -75,7 +76,25 @@ class Field extends React.Component {
     } else if (route === "completed") {
       return todos.filter(todo => !todo.active);
     }
+    console.log(todos);
     return todos;
+  };
+
+  toggleAllActive = () => {
+    const cloneTodos = this.state.todos.slice();
+    if (cloneTodos.filter(todo => !todo.active).length === cloneTodos.length) {
+      for (var i2 = 0; i2 < cloneTodos.length; i2++) {
+        cloneTodos[i2].active = !cloneTodos[i2].active;
+      }
+    } else {
+      for (var i = 0; i < cloneTodos.length; i++) {
+        if (cloneTodos[i].active) {
+          cloneTodos[i].active = false;
+        }
+      }
+    }
+    this.setState({ todos: cloneTodos });
+    this.storeState();
   };
 
   numberOfComplete = () => this.state.todos.filter(todo => !todo.active).length;
@@ -123,6 +142,23 @@ class Field extends React.Component {
     return (
       <div className="todoBox">
         <div className="newTodo">
+          <button
+            className={classnames({
+              toggleChevron: true,
+              hidden: this.state.todos.length ? false : true,
+              visibleActive:
+                this.numberOfComplete() !== this.state.todos.length
+                  ? true
+                  : false,
+              visibleInactive:
+                this.numberOfComplete() === this.state.todos.length
+                  ? true
+                  : false
+            })}
+            onClick={this.toggleAllActive}
+          >
+            ❯
+          </button>
           <input
             className="data"
             type="text"

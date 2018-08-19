@@ -25,14 +25,27 @@
   position: relative;
 }
 
-.newTodo::before {
-  content: "❯";
+.toggleChevron {
   position: absolute;
   transform: rotate(90deg);
-  left: 26px;
-  top: 20px;
+  left: 19px;
+  top: 18px;
   font-size: 25px;
-  color: rgb(230, 230, 230);
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.visibleActive {
+  color: #e6e6e6;
+}
+
+.visibleInactive {
+  color: #737373;
 }
 
 ul {

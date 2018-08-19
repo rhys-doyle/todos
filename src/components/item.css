@@ -5,7 +5,7 @@ li {
 
 .toggle {
   opacity: 0;
-  cursor: pointer;
+  cursor: default;
   max-width: 2px;
   position: absolute;
   left: 9px;
@@ -15,29 +15,31 @@ li {
 .toggleBox {
   position: relative;
   padding: 9px;
-  border: 1.5px solid #ededed;
+  border: 1px solid #ededed;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: default;
   color: transparent;
   text-align: center;
+  font-weight: 100;
 }
 
 .todo {
   padding: 16px;
   border: 1px solid transparent;
   background-color: rgb(254, 254, 254);
-  width: 70%;
+  width: 75%;
   font-size: 25px;
   font-weight: 100;
   outline: none;
 }
 
-button {
+.remove {
   font-size: 38px;
   font-weight: 100;
   color: rgba(175, 47, 47, 0.35);
   border: none;
   padding-right: 10px;
+  outline: none;
 }
 
 .todoItem::before {
@@ -53,7 +55,11 @@ button {
 }
 
 .checked {
-  border: 1.5px solid #c0dad5;
+  border: 1px solid #c0dad5;
   color: #6cc2af;
   font-weight: 100;
+}
+
+.unseen {
+  opacity: 0;
 }

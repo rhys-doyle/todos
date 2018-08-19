@@ -1,16 +1,7 @@
 import React from "react";
 import "./statusBar.css";
 import { Link } from "react-router-dom";
-
-const areCompleted = props => {
-  if (props.completeTotal) {
-    return (
-      <span className="clear" onClick={props.clearCompleted}>
-        Clear Completed
-      </span>
-    );
-  }
-};
+import classnames from "classnames";
 
 const StatusBar = props => {
   return (
@@ -20,8 +11,17 @@ const StatusBar = props => {
           {props.todosLength - props.completeTotal}
         </strong>
         {` item${
-          props.todosLength - props.completeTotal === 1 ? "" : "s"
-        } left`}
+          props.todosLength - props.completeTotal === 1 ? " left" : "s left"
+        }`}
+        <strong
+          className={classnames({
+            show: props.todosLength - props.completeTotal === 1 ? true : false,
+            notShow:
+              props.todosLength - props.completeTotal === 1 ? false : true
+          })}
+        >
+          s
+        </strong>
       </span>
       <span className="view">
         <Link
@@ -34,6 +34,7 @@ const StatusBar = props => {
         >
           All
         </Link>
+        <span className="spacer">&nbsp;&nbsp;</span>
         <Link
           to="/active"
           className={props.currentRoute === "active" ? "currentRoute" : ""}
@@ -44,6 +45,7 @@ const StatusBar = props => {
         >
           Active
         </Link>
+        <span className="spacer">&nbsp;&nbsp;</span>
         <Link
           to="/completed"
           className={props.currentRoute === "completed" ? "currentRoute" : ""}
@@ -55,7 +57,16 @@ const StatusBar = props => {
           Completed
         </Link>
       </span>
-      {areCompleted(props)}
+      <span
+        className={classnames({
+          clear: true,
+          invisible: props.completeTotal ? false : true,
+          visible: props.completeTotal ? true : false
+        })}
+        onClick={props.completeTotal ? props.clearCompleted : null}
+      >
+        Clear Completed
+      </span>
     </div>
   );
 };
