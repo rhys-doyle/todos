@@ -44,14 +44,10 @@ class Field extends React.Component {
 
   clearCompleted = () => {
     const cloneTodos = this.state.todos.slice();
-    let loop = -1;
-    cloneTodos.forEach(obj => {
-      loop = loop + 1;
-      if (!obj.active) {
-        cloneTodos.splice(loop, 1);
-      }
-    });
-    this.setState({ todos: cloneTodos }, this.storeState);
+    this.setState(
+      { todos: cloneTodos.filter(todo => todo.active) },
+      this.storeState
+    );
   };
 
   keyCheck = event => {
