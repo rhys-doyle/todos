@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Heading from "./components/heading.js";
-import Field from "./components/field.js";
+import Routes from "./routes";
 import "./App.css";
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <Heading />
-        <Field />
+        <Routes />
       </div>
     );
   }
