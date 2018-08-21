@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import "./item.css";
 
-const handleKeyDown = (event, handleEdit, index, setValue) => {
+const handleKeyDown = (event, handleEdit, id, setValue) => {
   if (event.keyCode === 13) {
-    handleEdit(index);
+    handleEdit(id);
   } else if (event.keyCode === 27) {
-    setValue(index);
+    setValue(id);
   }
 };
 
@@ -25,7 +25,7 @@ const Item = props => {
           className="toggle"
           type="checkbox"
           value="done"
-          onClick={() => props.doneToggle(props.index)}
+          onClick={() => props.doneToggle(props.id)}
           checked={!props.active}
         />
       </label>
@@ -35,18 +35,18 @@ const Item = props => {
           done: !props.active
         })}
         value={props.title}
-        onBlur={() => props.handleEdit(props.index)}
+        onBlur={() => props.handleEdit(props.id)}
         onKeyDown={event =>
-          handleKeyDown(event, props.handleEdit, props.index, props.setValue)
+          handleKeyDown(event, props.handleEdit, props.id, props.setValue)
         }
-        onDoubleClick={() => props.handleEdit(props.index)}
+        onDoubleClick={() => props.handleEdit(props.id)}
         readOnly={!props.edit}
         onChange={event =>
           props.handleOnChange(props.index, event.target.value)
         }
       />
 
-      <button className="remove" onClick={() => props.remove(props.index)}>
+      <button className="remove" onClick={() => props.remove(props.id)}>
         ×
       </button>
     </li>
