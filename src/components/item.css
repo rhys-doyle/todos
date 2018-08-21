@@ -40,6 +40,17 @@ li {
   border: none;
   padding-right: 10px;
   outline: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.todoItem:hover .remove {
+  opacity: 1;
+}
+
+.remove:hover {
+  color: rgba(175, 47, 47, 1);
 }
 
 .todoItem::before {
